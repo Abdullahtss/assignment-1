@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-const quotesData = {
+const quotesData: Record<"inspiration" | "success" | "life", string[]> = {
   inspiration: [
     "Believe you can and you're halfway there.",
     "Your time is limited, don't waste it living someone else's life.",
@@ -23,11 +23,11 @@ const quotesData = {
 
 export default function QuoteGenerator() {
   const [topic, setTopic] = useState("");
-  const [quotes, setQuotes] = useState([]);
+  const [quotes, setQuotes] = useState<string[]>([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const selectedQuotes = quotesData[topic.toLowerCase()];
+    const selectedQuotes = quotesData[topic.toLowerCase() as keyof typeof quotesData];
     setQuotes(selectedQuotes || []);
   };
 
